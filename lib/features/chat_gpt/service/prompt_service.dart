@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -22,12 +23,12 @@ class PromptService {
     required List<Message?> messageHistory,
   }) async {
     try {
-      final httpResponse = await dio.post(
+      final httpResponse = await dio.post<Object?>(
         'https://api.openai.com/v1/chat/completions',
         options: Options(
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
-            HttpHeaders.authorizationHeader: 'Bearer',
+            HttpHeaders.authorizationHeader: 'Bearer ',
           },
         ),
         data: {
@@ -35,9 +36,10 @@ class PromptService {
           'messages': messageHistory
         },
       );
+      print(httpResponse.data);
       if (httpResponse.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          PromptModel.fromJson(httpResponse.data as Map<String, dynamic>),
+          PromptModel.fromJson(httpResponse.data! as Map<String, dynamic>),
         );
       } else {
         return DataFailed(

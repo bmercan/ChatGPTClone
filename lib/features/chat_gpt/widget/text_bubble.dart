@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
+import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
+import 'package:openaimobile/features/chat_gpt/service/prompt_service.dart';
 import 'package:openaimobile/features/chat_gpt/widget/animated_text.dart';
+import 'package:provider/provider.dart';
 
 class TextBubble extends StatelessWidget {
   const TextBubble({required this.message, super.key});
@@ -37,9 +40,30 @@ class TextBubble extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.only(left: 34),
-            child: AnimatedTextWidget(text: message.content ?? ''),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 34),
+                  child: AnimatedTextWidget(text: message.content ?? ''),
+                ),
+              ),
+              if (message.success!)
+                const SizedBox.shrink()
+              else
+                GestureDetector(
+                  onTap: () {
+                    print('object');
+                    PromptService.instance.sendPrompt(
+                      messageHistory: context.read<PromptProvider>().chat,
+                    );
+                  },
+                  child: const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                  ),
+                )
+            ],
           ),
         ],
       ),

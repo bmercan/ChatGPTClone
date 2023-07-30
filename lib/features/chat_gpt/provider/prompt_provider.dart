@@ -13,14 +13,16 @@ class PromptProvider extends ChangeNotifier {
   List<Message?> get chat => _messageHistory;
   bool get responding => _responding;
   bool get isFailed => _isFailed;
+  String get lastPrompt => _lastPrompt;
 
   void _changeRespondingState() {
     _responding = !responding;
     notifyListeners();
   }
 
-  Future<void> sendPrompt({required String prompt}) async {
-    if (prompt.isEmpty) return;
+  Future<bool?> sendPrompt({required String prompt}) async {
+    if (prompt.isEmpty || _responding) return false;
+
     _changeRespondingState();
     _lastPrompt = prompt;
     _messageHistory.add(Message(role: UserEnum.user, content: prompt));
@@ -31,9 +33,12 @@ class PromptProvider extends ChangeNotifier {
       _messageHistory.add(response.data?.choices?.first.message);
       _isFailed = false;
     } else {
+      _messageHistory.last?.success = false;
       _isFailed = true;
-      print("patladı : ${response.error?.response}");
+      //print("patladı : ${}");
+      print("patladı : ${_messageHistory.last}");
     }
     _changeRespondingState();
+    return _isFailed;
   }
 }

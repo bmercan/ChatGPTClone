@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
-import 'package:openaimobile/features/chat_gpt/widget/text_bubble.dart';
-import 'package:openaimobile/testfile.dart';
+import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
+import 'package:openaimobile/features/chat_gpt/service/prompt_service.dart';
+import 'package:openaimobile/features/chat_gpt/view/chat_screen.dart';
+import 'package:provider/provider.dart';
 
 List<PromptModel> chat = [];
 
@@ -48,19 +50,8 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              controller: _scrollController,
-              itemCount: chat.length,
-              itemBuilder: (context, index) {
-                return Text(
-                    'ss'); /* TextBubble(
-                  text: chat[index].prompt ?? '',
-                  user: chat[index].user ?? UserEnum.user,
-                ); */
-              },
-            ),
+          ChatView(
+            controller: _scrollController,
           ),
           textField(),
         ],
@@ -69,6 +60,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   SafeArea textField() {
+    final provider = context.read<PromptProvider>();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -81,15 +73,16 @@ class _HomeViewState extends State<HomeView> {
                 onSubmitted: (value) {
                   FocusScope.of(context).unfocus();
                 },
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  suffixIcon: provider.responding
+                      ? const CircularProgressIndicator()
+                      : null, //Icon(Icons.close),
                   hintText: 'Hey...',
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // sendNewMessage(message: _textEditingController.text);
-              },
+              onTap: sendPrompt,
               child: Container(
                 margin: const EdgeInsets.only(left: 10),
                 padding: const EdgeInsets.all(5),
@@ -104,5 +97,19 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
     );
+  }
+
+  Future<void> sendPrompt() async {
+    final provider = context.read<PromptProvider>();
+    final prompt = _textEditingController.text;
+    _textEditingController.clear();
+    await provider.sendPrompt(prompt: prompt);
+    /*  if (response != null && response) {
+      print('error');
+
+      _textEditingController.text = prompt;
+    } else {
+      print('object');
+    } */
   }
 }
