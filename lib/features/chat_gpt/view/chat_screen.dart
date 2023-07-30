@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt_model.dart';
 import 'package:openaimobile/features/chat_gpt/view/home.dart';
 import 'package:openaimobile/features/chat_gpt/widget/text_bubble.dart';
@@ -24,3 +24,4 @@ class _ChatViewState extends State<ChatView> {
     );
   }
 }
+ */

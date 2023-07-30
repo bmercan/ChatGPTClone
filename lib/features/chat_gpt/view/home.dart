@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:openaimobile/features/chat_gpt/model/prompt_model.dart';
-
-import '../widget/text_bubble.dart';
-import 'chat_screen.dart';
+import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
+import 'package:openaimobile/features/chat_gpt/widget/text_bubble.dart';
+import 'package:openaimobile/testfile.dart';
 
 List<PromptModel> chat = [];
 
@@ -15,10 +13,10 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  TextEditingController _textEditingController = TextEditingController();
-  ScrollController _scrollController = ScrollController();
+  final TextEditingController _textEditingController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
-  void sendNewMessage({
+  /* void sendNewMessage({
     required String message,
     UserEnum user = UserEnum.user,
   }) {
@@ -36,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
     _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
 
     _textEditingController.clear();
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +54,11 @@ class _HomeViewState extends State<HomeView> {
               controller: _scrollController,
               itemCount: chat.length,
               itemBuilder: (context, index) {
-                return TextBubble(
+                return Text(
+                    'ss'); /* TextBubble(
                   text: chat[index].prompt ?? '',
                   user: chat[index].user ?? UserEnum.user,
-                );
+                ); */
               },
             ),
           ),
@@ -82,37 +81,24 @@ class _HomeViewState extends State<HomeView> {
                 onSubmitted: (value) {
                   FocusScope.of(context).unfocus();
                 },
-                decoration: InputDecoration(
-                  isDense: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(36),
-                    borderSide: const BorderSide(color: Colors.red),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(36),
-                    borderSide: const BorderSide(color: Colors.grey),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(36),
-                    borderSide: const BorderSide(color: Colors.grey),
-                  ),
+                decoration: const InputDecoration(
                   hintText: 'Hey...',
-                  hintStyle: const TextStyle(color: Colors.grey),
                 ),
               ),
             ),
             GestureDetector(
               onTap: () {
-                sendNewMessage(message: _textEditingController.text);
+                // sendNewMessage(message: _textEditingController.text);
               },
               child: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  padding: const EdgeInsets.all(5),
-                  decoration: const BoxDecoration(
-                    color: Colors.purple,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.arrow_forward, color: Colors.white)),
+                margin: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                  color: Colors.purple,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.arrow_forward, color: Colors.white),
+              ),
             )
           ],
         ),
