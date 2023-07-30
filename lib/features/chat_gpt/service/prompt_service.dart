@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:openaimobile/config/constants/app_constants.dart';
 import 'package:openaimobile/features/chat_gpt/model/http_helper.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
@@ -28,7 +29,7 @@ class PromptService {
         options: Options(
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
-            HttpHeaders.authorizationHeader: 'Bearer ',
+            HttpHeaders.authorizationHeader: 'Bearer ${AppConstants.token}',
           },
         ),
         data: {
