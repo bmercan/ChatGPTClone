@@ -2,12 +2,11 @@
 
 // ignore: depend_on_referenced_packages
 import 'package:json_annotation/json_annotation.dart';
+import 'package:openaimobile/config/enums/users.dart';
 import 'package:openaimobile/features/chat_gpt/model/choice.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
 
 part 'prompt.g.dart';
-
-enum UserEnum { user, assistant }
 
 @JsonSerializable()
 class PromptModel {

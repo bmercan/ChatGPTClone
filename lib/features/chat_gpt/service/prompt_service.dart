@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:openaimobile/config/constants/app_constants.dart';
+import 'package:openaimobile/config/constants/api_constants.dart';
+import 'package:openaimobile/config/enums/endpoints.dart';
 import 'package:openaimobile/features/chat_gpt/model/http_helper.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
@@ -25,15 +25,15 @@ class PromptService {
   }) async {
     try {
       final httpResponse = await dio.post<Object?>(
-        'https://api.openai.com/v1/chat/completions',
+        APIEndPoints.chatGPT.toFullUrl,
         options: Options(
           headers: {
-            HttpHeaders.contentTypeHeader: 'application/json',
-            HttpHeaders.authorizationHeader: 'Bearer ${AppConstants.token}',
+            HttpHeaders.contentTypeHeader: APIConstants.contentType,
+            HttpHeaders.authorizationHeader: APIConstants.authToken,
           },
         ),
         data: {
-          'model': AppConstants.chatGPTModel,
+          'model': APIConstants.chatGPTModel,
           'messages': messageHistory,
         },
       );

@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:openaimobile/config/extension/speed_extension.dart';
 
 class AnimatedTextWidget extends StatefulWidget {
   const AnimatedTextWidget({required this.text, super.key});

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:openaimobile/config/enums/users.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
-import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
-import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
-import 'package:openaimobile/features/chat_gpt/service/prompt_service.dart';
 import 'package:openaimobile/features/chat_gpt/widget/animated_text.dart';
-import 'package:provider/provider.dart';
 
 class TextBubble extends StatelessWidget {
   const TextBubble({required this.message, required this.index, super.key});
@@ -17,29 +14,7 @@ class TextBubble extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 24,
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 15,
-                  foregroundImage: NetworkImage(
-                    message.role == UserEnum.user
-                        ? 'https://lh3.googleusercontent.com/ogw/AGvuzYai0axOPglGgX7nffwwQmlcBQs-8PbG8PP5DcsR5w=s64-c-mo'
-                        : 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png',
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  message.role == UserEnum.user ? 'MERCAN' : 'CHAT-GPT',
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                ),
-              ],
-            ),
-          ),
+          header(context),
           const SizedBox(height: 10),
           Row(
             children: [
@@ -57,6 +32,30 @@ class TextBubble extends StatelessWidget {
                   color: Colors.red,
                 )
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  SizedBox header(BuildContext context) {
+    return SizedBox(
+      height: 24,
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 15,
+            foregroundImage: AssetImage(
+              message.role?.toImage ?? UserEnum.user.toImage,
+            ),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            message.role?.toName ?? 'USER',
+            style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
           ),
         ],
       ),

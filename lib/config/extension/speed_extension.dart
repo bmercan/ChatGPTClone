@@ -1,5 +1,3 @@
-import 'package:openaimobile/features/chat_gpt/model/message.dart';
-
 extension TypingSpeed on int {
   int get speed {
     if (this > 300) return 5;

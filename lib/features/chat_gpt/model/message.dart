@@ -1,7 +1,7 @@
-// ignore_for_file: sort_constructors_first
+// ignore_for_file: sort_constructors_first, depend_on_referenced_packages
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
+import 'package:openaimobile/config/enums/users.dart';
 
 part 'message.g.dart';
 
