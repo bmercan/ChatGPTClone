@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
 import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
-import 'package:openaimobile/features/chat_gpt/service/prompt_service.dart';
-import 'package:openaimobile/features/chat_gpt/view/chat_screen.dart';
+import 'package:openaimobile/features/chat_gpt/widget/chat.dart';
 import 'package:provider/provider.dart';
 
 List<PromptModel> chat = [];
@@ -17,36 +16,27 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final TextEditingController _textEditingController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  bool _firstAutoscrollExecuted = false;
+  bool _shouldAutoscroll = false;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
 
-  /* void sendNewMessage({
-    required String message,
-    UserEnum user = UserEnum.user,
-  }) {
-    if (message.isEmpty) return;
-    final prompt = PromptModel(
-      prompt: message,
-      user: user,
-    );
-    print(prompt.prompt);
-
-    // FocusScope.of(context).unfocus();
-    setState(() {
-      chat.add(prompt);
-    });
-    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-
-    _textEditingController.clear();
-  } */
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'Chat-GPT',
-        ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.more_horiz),
+        onPressed: () {},
       ),
       body: Column(
         children: [
@@ -60,7 +50,6 @@ class _HomeViewState extends State<HomeView> {
   }
 
   SafeArea textField() {
-    final provider = context.read<PromptProvider>();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -73,10 +62,7 @@ class _HomeViewState extends State<HomeView> {
                 onSubmitted: (value) {
                   FocusScope.of(context).unfocus();
                 },
-                decoration: InputDecoration(
-                  suffixIcon: provider.responding
-                      ? const CircularProgressIndicator()
-                      : null, //Icon(Icons.close),
+                decoration: const InputDecoration(
                   hintText: 'Hey...',
                 ),
               ),
@@ -90,7 +76,15 @@ class _HomeViewState extends State<HomeView> {
                   color: Colors.purple,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.arrow_forward, color: Colors.white),
+                child: context.watch<PromptProvider>().responding
+                    ? const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : const Icon(Icons.arrow_upward, color: Colors.white),
               ),
             )
           ],
@@ -103,13 +97,29 @@ class _HomeViewState extends State<HomeView> {
     final provider = context.read<PromptProvider>();
     final prompt = _textEditingController.text;
     _textEditingController.clear();
+    FocusScope.of(context).unfocus();
     await provider.sendPrompt(prompt: prompt);
-    /*  if (response != null && response) {
-      print('error');
+    if (_scrollController.hasClients && _shouldAutoscroll) {
+      _scrollToBottom();
+    }
+    if (!_firstAutoscrollExecuted && _scrollController.hasClients) {
+      _scrollToBottom();
+    }
+  }
 
-      _textEditingController.text = prompt;
+  void _scrollToBottom() {
+    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+  }
+
+  void _scrollListener() {
+    _firstAutoscrollExecuted = true;
+
+    if (_scrollController.hasClients &&
+        _scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
+      _shouldAutoscroll = true;
     } else {
-      print('object');
-    } */
+      _shouldAutoscroll = false;
+    }
   }
 }

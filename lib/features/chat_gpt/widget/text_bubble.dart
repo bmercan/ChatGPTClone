@@ -7,8 +7,9 @@ import 'package:openaimobile/features/chat_gpt/widget/animated_text.dart';
 import 'package:provider/provider.dart';
 
 class TextBubble extends StatelessWidget {
-  const TextBubble({required this.message, super.key});
+  const TextBubble({required this.message, required this.index, super.key});
   final Message message;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,17 +52,9 @@ class TextBubble extends StatelessWidget {
               if (message.success!)
                 const SizedBox.shrink()
               else
-                GestureDetector(
-                  onTap: () {
-                    print('object');
-                    PromptService.instance.sendPrompt(
-                      messageHistory: context.read<PromptProvider>().chat,
-                    );
-                  },
-                  child: const Icon(
-                    Icons.error_outline,
-                    color: Colors.red,
-                  ),
+                const Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
                 )
             ],
           ),

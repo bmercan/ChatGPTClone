@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class Themes {
   static final darkTheme = ThemeData(
+    useMaterial3: true,
+    scaffoldBackgroundColor: Colors.black,
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
       border: OutlineInputBorder(
@@ -17,6 +19,12 @@ class Themes {
         borderSide: const BorderSide(color: Colors.grey),
       ),
       hintStyle: const TextStyle(color: Colors.grey),
+    ),
+    progressIndicatorTheme:
+        const ProgressIndicatorThemeData(color: Colors.white),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Colors.grey.shade900,
+      foregroundColor: Colors.white,
     ),
   );
 }

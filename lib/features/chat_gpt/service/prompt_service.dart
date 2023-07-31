@@ -33,11 +33,11 @@ class PromptService {
           },
         ),
         data: {
-          'model': 'gpt-3.5-turbo', //AppConstants.CHAT_GPT_MODEL,
-          'messages': messageHistory
+          'model': AppConstants.chatGPTModel,
+          'messages': messageHistory,
         },
       );
-      print(httpResponse.data);
+      print("responsee : ${httpResponse}");
       if (httpResponse.statusCode == HttpStatus.ok) {
         return DataSuccess(
           PromptModel.fromJson(httpResponse.data! as Map<String, dynamic>),
@@ -50,6 +50,7 @@ class PromptService {
         );
       }
     } on DioException catch (e) {
+      print("responsee ${e.response}");
       return DataFailed(e);
     }
   }
