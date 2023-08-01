@@ -24,5 +24,5 @@ class Choice {
 
   @override
   String toString() =>
-      'Choice(index: $index, message: $message, finishReason: $finishReason)';
+      'Choice(index: $index, message: $message, finish_reason: $finishReason)';
 }
