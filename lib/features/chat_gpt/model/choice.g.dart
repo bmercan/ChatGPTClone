@@ -11,11 +11,11 @@ Choice _$ChoiceFromJson(Map<String, dynamic> json) => Choice(
       message: json['message'] == null
           ? null
           : Message.fromJson(json['message'] as Map<String, dynamic>),
-      finishReason: json['finish_reason'] as String?,
+      finishReason: json['finishReason'] as String?,
     );
 
 Map<String, dynamic> _$ChoiceToJson(Choice instance) => <String, dynamic>{
       'index': instance.index,
       'message': instance.message,
-      'finish_reason': instance.finishReason,
+      'finishReason': instance.finishReason,
     };

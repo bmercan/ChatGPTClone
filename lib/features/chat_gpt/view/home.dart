@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:openaimobile/config/enums/users.dart';
+import 'package:openaimobile/features/chat_gpt/model/message.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
 import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
 import 'package:openaimobile/features/chat_gpt/widget/chat.dart';
@@ -14,6 +17,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  Box<Message> commentBox = Hive.box<Message>('mybox');
+
   final TextEditingController _textEditingController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   bool _firstAutoscrollExecuted = false;
@@ -36,7 +41,20 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.more_horiz),
-        onPressed: () {},
+        onPressed: () {
+          try {
+            commentBox.add(
+              Message(
+                role: UserEnum.user,
+                content: 'Merhaba',
+              ),
+            );
+            // print(commentBox.get('1234'));
+          } catch (e) {
+            print(e);
+          }
+          //commentBox.put('1234', 'Merhaba');
+        },
       ),
       body: Column(
         children: [

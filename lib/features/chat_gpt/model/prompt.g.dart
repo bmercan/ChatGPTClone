@@ -22,7 +22,7 @@ Map<String, dynamic> _$PromptModelToJson(PromptModel instance) =>
       'model': instance.model,
       'choices': instance.choices,
     };
-
+/* 
 Message _$MessageFromJson(Map<String, dynamic> json) => Message(
       role: $enumDecodeNullable(_$UserEnumEnumMap, json['role']),
       content: json['content'] as String?,
@@ -37,3 +37,4 @@ const _$UserEnumEnumMap = {
   UserEnum.user: 'user',
   UserEnum.assistant: 'assistant',
 };
+ */
