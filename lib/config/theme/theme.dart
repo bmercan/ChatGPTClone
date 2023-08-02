@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Themes {
   static final darkTheme = ThemeData(
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle.light,
+    ),
     useMaterial3: true,
     scaffoldBackgroundColor: Colors.black,
     inputDecorationTheme: InputDecorationTheme(

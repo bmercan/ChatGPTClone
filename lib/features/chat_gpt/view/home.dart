@@ -40,24 +40,7 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.more_horiz),
-        onPressed: () {
-          try {
-            final Box<List<Message?>> _messageHistoryBox =
-                Hive.box<List<Message?>>(AppConstants.chatBox);
-            print(_messageHistoryBox.length);
-            _messageHistoryBox.clear();
-            /* commentBox.add(
-              Message(
-                role: UserEnum.user,
-                content: 'Merhaba',
-              ),
-            ); */
-            // print(commentBox.get('1234'));
-          } catch (e) {
-            print(e);
-          }
-          //commentBox.put('1234', 'Merhaba');
-        },
+        onPressed: () {},
       ),
       body: Column(
         children: [

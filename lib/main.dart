@@ -45,7 +45,7 @@ class OpenAI extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Material App',
           home: TestScreen(), //const HomeView(), //
-          theme: Themes.darkTheme,
+          darkTheme: Themes.darkTheme,
         );
       },
     );

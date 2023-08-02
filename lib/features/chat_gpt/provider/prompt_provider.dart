@@ -11,7 +11,7 @@ class PromptProvider extends ChangeNotifier {
   bool _responding = false;
   final List<Message?> _messageHistory = [];
 
-  final String sessionName = 'session4';
+  String? sessionName;
   final Box<HiveChatModel> _messageHistoryBox =
       Hive.box<HiveChatModel>(AppConstants.chatBox);
 
@@ -42,9 +42,12 @@ class PromptProvider extends ChangeNotifier {
   void loadChat() {}
 
   Future<void> saveChat({required List<Message?> message}) async {
+    // if message is empty, new session
     try {
+      newSession();
       print("saving...");
       final chat = HiveChatModel(
+        date: DateTime.now(),
         title: message.first?.content ?? '',
         chat: message,
       );
@@ -53,5 +56,25 @@ class PromptProvider extends ChangeNotifier {
     } on HiveError catch (e) {
       print(e);
     }
+  }
+
+  void newSession({bool newSession = false}) {
+    if (newSession) {
+      sessionName = 'session_${_messageHistoryBox.values.length + 1}';
+    }
+    if (sessionName == null) {
+      if (_messageHistoryBox.values.isEmpty) {
+        sessionName = 'session_0';
+      } else {
+        sessionName = 'session_${_messageHistoryBox.values.length + 1}';
+      }
+    }
+    notifyListeners();
+  }
+
+  void newChat() {
+    _messageHistory.clear();
+    newSession(newSession: true);
+    notifyListeners();
   }
 }
