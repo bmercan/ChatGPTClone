@@ -10,28 +10,29 @@ class ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<PromptProvider>(
-      builder: (context, value, child) => Expanded(
-        child: value.chat.isEmpty
-            ? Center(
-                child: Text(
-                  'ChatGPT',
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+      builder: (context, value, child) {
+        return Expanded(
+          child: value.chat.isEmpty
+              ? Center(
+                  child: Text(
+                    'ChatGPT',
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                )
+              : ListView.builder(
+                  controller: controller,
+                  itemCount: value.chat.length,
+                  itemBuilder: (context, index) {
+                    return TextBubble(
+                      message: value.chat[index]!,
+                      index: index,
+                    );
+                  },
                 ),
-              )
-            : ListView.builder(
-                controller: controller,
-                itemCount: value.chat.length,
-                itemBuilder: (context, index) {
-                  return TextBubble(
-                    message: value.chat[index]!,
-                    index: index,
-                  );
-                },
-              ),
-      ),
+        );
+      },
     );
   }
 }

@@ -37,7 +37,6 @@ class PromptService {
           'messages': messageHistory,
         },
       );
-      print("responsee : ${httpResponse}");
       if (httpResponse.statusCode == HttpStatus.ok) {
         return DataSuccess(
           PromptModel.fromJson(httpResponse.data! as Map<String, dynamic>),
@@ -50,7 +49,6 @@ class PromptService {
         );
       }
     } on DioException catch (e) {
-      print("responsee ${e.response}");
       return DataFailed(e);
     }
   }

@@ -9,13 +9,14 @@ import 'package:openaimobile/features/chat_gpt/service/prompt_service.dart';
 
 class PromptProvider extends ChangeNotifier {
   bool _responding = false;
-  final List<Message?> _messageHistory = [];
+  List<Message?> _messageHistory = [];
 
-  String? sessionName;
+  String? _sessionName;
   final Box<HiveChatModel> _messageHistoryBox =
       Hive.box<HiveChatModel>(AppConstants.chatBox);
 
   List<Message?> get chat => _messageHistory;
+  Box<HiveChatModel> get chatBox => _messageHistoryBox;
   bool get responding => _responding;
 
   void _changeRespondingState() {
@@ -39,34 +40,45 @@ class PromptProvider extends ChangeNotifier {
     _changeRespondingState();
   }
 
-  void loadChat() {}
+  Future<void> loadChat({
+    required HiveChatModel hiveChat,
+    required String sessionName,
+  }) async {
+    _messageHistory.clear();
+    notifyListeners();
+    await Future.delayed(
+      const Duration(milliseconds: 11),
+    );
+    _messageHistory = hiveChat.chat ?? [];
+    _sessionName = sessionName;
+    notifyListeners();
+  }
 
-  Future<void> saveChat({required List<Message?> message}) async {
+  Future<bool> saveChat({required List<Message?> message}) async {
     // if message is empty, new session
     try {
       newSession();
-      print("saving...");
       final chat = HiveChatModel(
         date: DateTime.now(),
         title: message.first?.content ?? '',
         chat: message,
       );
-      await _messageHistoryBox.put(sessionName, chat);
-      print("$sessionName adıyla Kaydedildi : ${message}");
-    } on HiveError catch (e) {
-      print(e);
+      await _messageHistoryBox.put(_sessionName, chat);
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
   void newSession({bool newSession = false}) {
     if (newSession) {
-      sessionName = 'session_${_messageHistoryBox.values.length + 1}';
+      _sessionName = 'session_${_messageHistoryBox.values.length + 1}';
     }
-    if (sessionName == null) {
+    if (_sessionName == null) {
       if (_messageHistoryBox.values.isEmpty) {
-        sessionName = 'session_0';
+        _sessionName = 'session_0';
       } else {
-        sessionName = 'session_${_messageHistoryBox.values.length + 1}';
+        _sessionName = 'session_${_messageHistoryBox.values.length + 1}';
       }
     }
     notifyListeners();

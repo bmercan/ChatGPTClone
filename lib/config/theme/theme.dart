@@ -3,6 +3,11 @@ import 'package:flutter/services.dart';
 
 class Themes {
   static final darkTheme = ThemeData(
+    colorScheme: ColorScheme.dark(
+      background: Colors.black,
+      onInverseSurface: Colors.white,
+      surfaceVariant: Colors.grey.shade900,
+    ),
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
@@ -26,6 +31,7 @@ class Themes {
     ),
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: Colors.white),
+    iconTheme: const IconThemeData(color: Colors.white),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.grey.shade900,
       foregroundColor: Colors.white,

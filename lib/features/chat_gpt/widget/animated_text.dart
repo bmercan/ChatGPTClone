@@ -14,21 +14,15 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return DefaultTextStyle(
-      style: Theme.of(context)
-          .textTheme
-          .titleMedium!
-          .copyWith(color: Colors.white),
-      child: AnimatedTextKit(
-        // key: const PageStorageKey<String>('animated_text'),
-        isRepeatingAnimation: false,
-        animatedTexts: [
-          TyperAnimatedText(
-            widget.text,
-            speed: const Duration(milliseconds: 10),
-          ),
-        ],
-      ),
+    return AnimatedTextKit(
+      isRepeatingAnimation: false,
+      animatedTexts: [
+        TyperAnimatedText(
+          widget.text,
+          textStyle: Theme.of(context).textTheme.titleMedium,
+          speed: const Duration(milliseconds: 10),
+        ),
+      ],
     );
   }
 

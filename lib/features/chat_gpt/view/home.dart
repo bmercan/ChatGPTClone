@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:openaimobile/config/constants/app_constants.dart';
@@ -5,7 +6,9 @@ import 'package:openaimobile/config/enums/users.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
 import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
 import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
+import 'package:openaimobile/features/chat_gpt/widget/history.dart';
 import 'package:openaimobile/features/chat_gpt/widget/chat.dart';
+import 'package:openaimobile/features/chat_gpt/widget/popup_menu.dart';
 import 'package:provider/provider.dart';
 
 List<PromptModel> chat = [];
@@ -38,10 +41,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.more_horiz),
-        onPressed: () {},
-      ),
+      floatingActionButton: const CustomPopupMenuButton(),
       body: Column(
         children: [
           ChatView(
@@ -88,7 +88,7 @@ class _HomeViewState extends State<HomeView> {
                           strokeWidth: 2,
                         ),
                       )
-                    : const Icon(Icons.arrow_upward, color: Colors.white),
+                    : const Icon(Icons.arrow_upward),
               ),
             )
           ],
