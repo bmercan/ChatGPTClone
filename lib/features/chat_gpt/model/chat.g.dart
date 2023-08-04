@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'testmodel.dart';
+part of 'chat.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

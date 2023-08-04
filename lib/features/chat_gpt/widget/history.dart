@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:openaimobile/features/chat_gpt/model/testmodel.dart';
+import 'package:openaimobile/features/chat_gpt/model/chat.dart';
 import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
 import 'package:provider/provider.dart';
 
