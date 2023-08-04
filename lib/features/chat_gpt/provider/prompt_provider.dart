@@ -4,7 +4,7 @@ import 'package:openaimobile/config/constants/app_constants.dart';
 import 'package:openaimobile/config/enums/users.dart';
 import 'package:openaimobile/features/chat_gpt/model/http_helper.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
-import 'package:openaimobile/features/chat_gpt/model/testmodel.dart';
+import 'package:openaimobile/features/chat_gpt/model/chat.dart';
 import 'package:openaimobile/features/chat_gpt/service/prompt_service.dart';
 
 class PromptProvider extends ChangeNotifier {
