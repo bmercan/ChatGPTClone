@@ -39,7 +39,27 @@ class APIConstants {
 }
 
 ``` 
+---
+
+### Hive
+I used hive for save chat history. I firstly tried save history of messages as ```List<Message?>``` but because of limitation of Dart it was not possible to save generic list to ```Hive``` so i created a **Class** named **HiveChatModel** and saved it as is.
+```dart
+class HiveChatModel{
+  String? title;
+  DateTime? date;
+  List<Message?>? chat;
+}
+```
+
+Ability to load history messages and continue to chat then saved it again i used ```Hive.put()```
+```dart
+Hive.put(sesionName,messages)
+```
+when you load a chat, you also get ```sessionName```
+
+```sessionName``` is generated as ```session_${lengthOfHiveHistoryList}``` 
  
 ---
+## Screenshots
 <img width="1744" alt="rmb" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/0fed0969-b37f-46eb-a059-f95eb5a59630">
 <img width="1301" alt="rml" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/25c67a89-8cb8-4b67-a505-ec947c0a15b4">
