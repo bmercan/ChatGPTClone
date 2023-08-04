@@ -1,16 +1,45 @@
-# openaimobile
+# Chat GPT Mobile App
 
-A new Flutter project.
+App for Chat GPT, This project build with flutter and Dall-E 2 will be added.
 
-## Getting Started
+Packages used in this project
 
-This project is a starting point for a Flutter application.
+* [provider](https://pub.dev/packages/provider)
+* [json_serializable](https://pub.dev/packages/json_serializable)
+* [hive](https://pub.dev/packages/hive)
+* [dotenv](https://pub.dev/packages/dotenv)
+* [dio](https://pub.dev/packages/dio)  
+* [animated_text_kit](https://pub.dev/packages/animated_text_kit)  for Typing effect
+---
 
-A few resources to get you started if this is your first Flutter project:
+### Before You Start
+You have to create ```.env``` file into base of your project and give your [OpenAI API Key](https://platform.openai.com/account/api-keys) as ```BEARER = 'API_KEY'``` 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**OR**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Go to file [lib/config/constants/api_constants.dart](https://github.com/bmercan/ChatGPTClone/blob/main/lib/config/constants/api_constants.dart) then
+
+Change this
+ ```dart
+import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv; // Remove this line
+
+class APIConstants {
+      //..
+      static String authToken = 'Bearer ${dotenv.env['BEARER_TOKEN']}'
+      //..
+}
+```
+to this
+ ```dart
+
+class APIConstants {
+      //..
+      static String authToken = 'Bearer API_KEY'
+      //..
+}
+
+``` 
+ 
+---
+<img width="1744" alt="rmb" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/0fed0969-b37f-46eb-a059-f95eb5a59630">
+<img width="1301" alt="rml" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/25c67a89-8cb8-4b67-a505-ec947c0a15b4">
