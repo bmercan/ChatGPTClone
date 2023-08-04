@@ -15,13 +15,15 @@ class CustomPopupMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: null,
+      backgroundColor: Theme.of(context).colorScheme.surfaceTint,
+      elevation: 0,
       child: _PopupMenu(
         builder: (_, showMenu) => CupertinoButton(
           onPressed: showMenu,
           padding: EdgeInsets.zero,
           child: Icon(
             Icons.more_horiz,
-            color: Theme.of(context).colorScheme.onInverseSurface,
+            color: Theme.of(context).colorScheme.inverseSurface,
           ),
         ),
       ),
@@ -39,14 +41,14 @@ class _PopupMenu extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
     return PullDownButton(
       routeTheme: PullDownMenuRouteTheme(
-        backgroundColor: theme.surfaceVariant,
+        backgroundColor: theme.surfaceTint,
       ),
       itemBuilder: (context) => [
         PullDownMenuItem(
-          iconColor: theme.onInverseSurface,
+          iconColor: theme.inverseSurface,
           itemTheme: PullDownMenuItemTheme(
             textStyle: TextStyle(
-              color: theme.onInverseSurface,
+              color: theme.inverseSurface,
             ),
           ),
           onTap: () {
@@ -56,10 +58,10 @@ class _PopupMenu extends StatelessWidget {
           icon: CupertinoIcons.add,
         ),
         PullDownMenuItem(
-          iconColor: theme.onInverseSurface,
+          iconColor: theme.inverseSurface,
           itemTheme: PullDownMenuItemTheme(
             textStyle: TextStyle(
-              color: theme.onInverseSurface,
+              color: theme.inverseSurface,
             ),
           ),
           title: 'History',

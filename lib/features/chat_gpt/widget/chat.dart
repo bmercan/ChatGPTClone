@@ -16,9 +16,7 @@ class ChatView extends StatelessWidget {
               ? Center(
                   child: Text(
                     'ChatGPT',
-                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
                 )
               : ListView.builder(

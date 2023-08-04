@@ -1,17 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:openaimobile/config/constants/app_constants.dart';
-import 'package:openaimobile/config/enums/users.dart';
-import 'package:openaimobile/features/chat_gpt/model/message.dart';
-import 'package:openaimobile/features/chat_gpt/model/prompt.dart';
 import 'package:openaimobile/features/chat_gpt/provider/prompt_provider.dart';
-import 'package:openaimobile/features/chat_gpt/widget/history.dart';
 import 'package:openaimobile/features/chat_gpt/widget/chat.dart';
 import 'package:openaimobile/features/chat_gpt/widget/popup_menu.dart';
 import 'package:provider/provider.dart';
-
-List<PromptModel> chat = [];
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -44,9 +35,7 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButton: const CustomPopupMenuButton(),
       body: Column(
         children: [
-          ChatView(
-            controller: _scrollController,
-          ),
+          ChatView(controller: _scrollController),
           textField(),
         ],
       ),
@@ -62,7 +51,9 @@ class _HomeViewState extends State<HomeView> {
             Expanded(
               child: TextField(
                 controller: _textEditingController,
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inverseSurface,
+                ),
                 onSubmitted: (value) {
                   FocusScope.of(context).unfocus();
                 },
@@ -88,7 +79,10 @@ class _HomeViewState extends State<HomeView> {
                           strokeWidth: 2,
                         ),
                       )
-                    : const Icon(Icons.arrow_upward),
+                    : const Icon(
+                        Icons.arrow_upward,
+                        color: Colors.white,
+                      ),
               ),
             )
           ],
