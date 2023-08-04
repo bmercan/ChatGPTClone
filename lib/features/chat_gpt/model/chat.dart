@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'chat.g.dart';
 

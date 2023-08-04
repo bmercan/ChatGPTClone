@@ -1,4 +1,4 @@
-// ignore_for_file: inference_failure_on_instance_creation
+// ignore_for_file: inference_failure_on_instance_creation, inference_failure_on_function_invocation
 
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';

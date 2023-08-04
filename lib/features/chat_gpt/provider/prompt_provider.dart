@@ -1,10 +1,12 @@
+// ignore_for_file: inference_failure_on_instance_creation
+
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:openaimobile/config/constants/app_constants.dart';
 import 'package:openaimobile/config/enums/users.dart';
+import 'package:openaimobile/features/chat_gpt/model/chat.dart';
 import 'package:openaimobile/features/chat_gpt/model/http_helper.dart';
 import 'package:openaimobile/features/chat_gpt/model/message.dart';
-import 'package:openaimobile/features/chat_gpt/model/chat.dart';
 import 'package:openaimobile/features/chat_gpt/service/prompt_service.dart';
 
 class PromptProvider extends ChangeNotifier {
