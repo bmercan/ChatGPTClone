@@ -61,5 +61,5 @@ when you load a chat, you also get ```sessionName```
  
 ---
 ## Screenshots
-<img width="1744" alt="rmb" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/0fed0969-b37f-46eb-a059-f95eb5a59630">
-<img width="1301" alt="rml" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/25c67a89-8cb8-4b67-a505-ec947c0a15b4">
+<img width="1744" alt="rmb" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/8b3c024b-188f-4b27-a487-f141e7c764d4">
+<img width="1301" alt="rml" src="https://github.com/bmercan/ChatGPTClone/assets/78664137/0cce9c84-a3ce-4b4b-b4df-69aaaceb5691">
