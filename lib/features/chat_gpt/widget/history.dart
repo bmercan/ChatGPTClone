@@ -10,13 +10,14 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final messageHistoryBox = context.read<PromptProvider>().chatBox;
+    final theme = Theme.of(context).colorScheme;
     return ColoredBox(
-      color: Theme.of(context).colorScheme.surfaceVariant,
+      color: Theme.of(context).colorScheme.surfaceTint,
       child: Column(
         children: [
           DecoratedBox(
             decoration: BoxDecoration(
-              color: Colors.grey.shade800,
+              color: theme.surfaceTint,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,7 +26,7 @@ class HistoryScreen extends StatelessWidget {
                   onPressed: null,
                   icon: Icon(
                     CupertinoIcons.xmark_circle_fill,
-                    color: Colors.grey.shade800,
+                    color: theme.surfaceTint,
                   ),
                 ),
                 Text(
@@ -70,7 +71,7 @@ class HistoryScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.grey.shade800,
+        color: Theme.of(context).colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
@@ -88,6 +89,7 @@ class HistoryScreen extends StatelessWidget {
         ),
         subtitle: Text(
           messages.chat?.last?.content ?? '',
+          style: Theme.of(context).textTheme.bodyMedium,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
