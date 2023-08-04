@@ -66,7 +66,7 @@ class Themes {
       secondaryContainer: Colors.grey.shade300,
     ),
     appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.light,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
